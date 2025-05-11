@@ -86,7 +86,7 @@ const FloatingHeaderMobile = ({
               className="relative flex aspect-square cursor-pointer items-center justify-center rounded-full bg-[#eeeeee] dark:bg-neutral-800"
             >
               <AnimatePresence>
-                {(
+                {
                   <motion.div
                     initial={{ opacity: 0, y: 10, x: '-50%' }}
                     animate={{ opacity: 1, y: 0, x: '-50%' }}
@@ -95,11 +95,9 @@ const FloatingHeaderMobile = ({
                   >
                     {`${theme === 'dark' ? 'Light' : 'Dark'} Theme`}
                   </motion.div>
-                )}
+                }
               </AnimatePresence>
-              <motion.div
-                className="flex items-center justify-center"
-              >
+              <motion.div className="flex items-center justify-center">
                 <IconSun className="hidden text-white dark:block" />
                 <IconMoon className="block text-black dark:hidden" />
               </motion.div>
@@ -110,6 +108,9 @@ const FloatingHeaderMobile = ({
       <button
         onClick={() => setOpen(!open)}
         className="flex h-10 w-10 items-center justify-center rounded-full border border-[#33a3f4] bg-[#f8fafc] text-black dark:border-[#a78bfa] dark:bg-neutral-900 dark:text-white"
+        aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-expanded={open}
+        aria-controls="mobile-navigation"
       >
         <IconLayoutNavbarCollapse className="h-5 w-5" />
       </button>

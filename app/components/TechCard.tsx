@@ -6,7 +6,7 @@ const TechCard = ({
   cardInfo: {
     name: string
     description: string
-    imageUrl: string,
+    imageUrl: string
     bgColor: string
   }
 }) => (
@@ -21,7 +21,7 @@ const TechCard = ({
       />
     </div>
     <div>
-      <h4 className="text-lg font-medium dark:text-stone-100">{name}</h4>
+      <h1 className="text-lg font-medium dark:text-stone-100">{name}</h1>
       <p className="text-dark-200/70 text-sm dark:text-[#d7dde4]">
         {description}
       </p>

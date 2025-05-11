@@ -43,6 +43,8 @@ const FloatingHeaderMobile = ({
   className?: string
 }) => {
   const [open, setOpen] = useState(false)
+  const { setTheme, theme } = useTheme()
+
   return (
     <div className={cn('relative block md:hidden', className)}>
       <AnimatePresence>
@@ -71,20 +73,45 @@ const FloatingHeaderMobile = ({
                 <Link
                   href={item.href}
                   key={item.title}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-900"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-[#eeeeee] text-black dark:bg-neutral-800 dark:text-white"
                 >
                   <div className="h-4 w-4">{item.icon}</div>
                 </Link>
               </motion.div>
             ))}
+
+            {/* theme switcher */}
+            <motion.div
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="relative flex aspect-square cursor-pointer items-center justify-center rounded-full bg-[#eeeeee] dark:bg-neutral-800"
+            >
+              <AnimatePresence>
+                {(
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, x: '-50%' }}
+                    animate={{ opacity: 1, y: 0, x: '-50%' }}
+                    exit={{ opacity: 0, y: 2, x: '-50%' }}
+                    className="text:black absolute -top-8 left-1/2 w-fit -translate-x-1/2 rounded-md border border-neutral-100 bg-neutral-200 px-2 py-0.5 text-xs whitespace-pre dark:border-neutral-900 dark:bg-neutral-800 dark:text-white"
+                  >
+                    {`${theme === 'dark' ? 'Light' : 'Dark'} Theme`}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <motion.div
+                className="flex items-center justify-center"
+              >
+                <IconSun className="hidden text-white dark:block" />
+                <IconMoon className="block text-black dark:hidden" />
+              </motion.div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
       <button
         onClick={() => setOpen(!open)}
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-800"
+        className="flex h-10 w-10 items-center justify-center rounded-full border border-[#33a3f4] bg-[#f8fafc] text-black dark:border-[#a78bfa] dark:bg-neutral-900 dark:text-white"
       >
-        <IconLayoutNavbarCollapse className="h-5 w-5 text-neutral-400" />
+        <IconLayoutNavbarCollapse className="h-5 w-5" />
       </button>
     </div>
   )
@@ -103,7 +130,7 @@ const FloatingHeaderDesktop = ({
       onMouseMove={e => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        'mx-auto hidden h-16 items-end gap-4 rounded-2xl border border-[#09436a] bg-[#f8fafc] p-2.5 px-4 pb-3 transition-colors duration-200 hover:border-[#406279] md:flex dark:border-[#554a79] dark:bg-[#202023]/90 dark:bg-neutral-900 dark:hover:border-[#8978c5]',
+        'mx-auto hidden h-16 items-end gap-4 rounded-2xl border border-[#33a3f4] bg-[#f8fafc] p-2.5 px-4 pb-3 transition-colors duration-200 hover:border-[#33a4f494] md:flex dark:border-[#a78bfa] dark:bg-neutral-900 dark:hover:border-[#8978c5]',
         className,
       )}
     >
@@ -137,8 +164,16 @@ function IconContainer({
   const widthTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40])
   const heightTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40])
 
-  const widthTransformIcon = useTransform(distance, [-150, 0, 150], [20, 40, 20])
-  const heightTransformIcon = useTransform(distance, [-150, 0, 150], [20, 40, 20])
+  const widthTransformIcon = useTransform(
+    distance,
+    [-150, 0, 150],
+    [20, 40, 20],
+  )
+  const heightTransformIcon = useTransform(
+    distance,
+    [-150, 0, 150],
+    [20, 40, 20],
+  )
 
   const width = useSpring(widthTransform, {
     mass: 0.1,
@@ -171,7 +206,7 @@ function IconContainer({
         style={{ width, height }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="relative flex aspect-square items-center justify-center rounded-full bg-neutral-200 dark:bg-neutral-800"
+        className="relative flex aspect-square items-center justify-center rounded-full bg-[#eeeeee] dark:bg-neutral-800"
       >
         <AnimatePresence>
           {hovered && (
@@ -207,8 +242,16 @@ function ThemeSwitcher({ mouseX }: { mouseX: MotionValue }) {
   const widthTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40])
   const heightTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40])
 
-  const widthTransformIcon = useTransform(distance, [-150, 0, 150], [20, 40, 20])
-  const heightTransformIcon = useTransform(distance, [-150, 0, 150], [20, 40, 20])
+  const widthTransformIcon = useTransform(
+    distance,
+    [-150, 0, 150],
+    [20, 40, 20],
+  )
+  const heightTransformIcon = useTransform(
+    distance,
+    [-150, 0, 150],
+    [20, 40, 20],
+  )
 
   const width = useSpring(widthTransform, {
     mass: 0.1,
@@ -242,7 +285,7 @@ function ThemeSwitcher({ mouseX }: { mouseX: MotionValue }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="relative flex aspect-square cursor-pointer items-center justify-center rounded-full bg-neutral-200 dark:bg-neutral-800"
+      className="relative flex aspect-square cursor-pointer items-center justify-center rounded-full bg-[#eeeeee] dark:bg-neutral-800"
     >
       <AnimatePresence>
         {hovered && (

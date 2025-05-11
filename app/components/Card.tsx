@@ -2,8 +2,9 @@ import { motion, MotionValue, useScroll, useTransform } from 'framer-motion'
 import { IconLink } from '@tabler/icons-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import ProjectTechnologieItem from './ui/ProjectTechnologieItem'
+import { useTheme } from 'next-themes'
 
 type Project = {
   id: number
@@ -33,6 +34,28 @@ const Card: React.FC<Props> = ({
   globalProgress,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
+  const { theme, resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  const [currentImage, setCurrentImage] = useState<string>(data.imagePath)
+  
+  // Set mounted to true after component mounts to avoid hydration issues
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+  
+  useEffect(() => {
+    if (!mounted) return;
+    
+    // Use resolvedTheme which is more reliable than theme
+    const currentTheme = resolvedTheme || theme;
+    
+    if (currentTheme === 'dark' && data.imagePathDark) {
+      setCurrentImage(data.imagePathDark);
+    } else {
+      setCurrentImage(data.imagePath);
+    }
+  }, [theme, resolvedTheme, data.imagePath, data.imagePathDark, mounted])
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start end', 'start start'],
@@ -52,8 +75,6 @@ const Card: React.FC<Props> = ({
     id,
     description,
     link,
-    imagePath,
-    liveAppLink,
     name,
     subtitle,
     technologies,
@@ -85,7 +106,7 @@ const Card: React.FC<Props> = ({
             className="h-auto w-full rounded-xl object-cover"
             width={0}
             height={0}
-            src={imagePath}
+            src={currentImage}
             alt="project-1"
             sizes="100vw"
           />
@@ -108,14 +129,6 @@ const Card: React.FC<Props> = ({
                 <IconLink />
                 <Link target="_blank" href={link}>
                   Link
-                </Link>
-              </div>
-            ) : null}
-            {liveAppLink ? (
-              <div className="flex gap-1">
-                <IconLink />
-                <Link target="_blank" href={liveAppLink}>
-                  Live App
                 </Link>
               </div>
             ) : null}

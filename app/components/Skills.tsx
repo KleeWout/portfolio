@@ -28,7 +28,7 @@ const Skills = () => {
         transition={{ duration: 0.5, delay: 0.25 }}
         className="text-3xl font-bold min-[430px]:text-4xl md:text-5xl dark:text-stone-200"
       >
-        Current technologies
+        My Current Skills
       </motion.h1>
       <motion.p
         initial="initial"
@@ -37,9 +37,9 @@ const Skills = () => {
         transition={{ duration: 0.5, delay: 0.25 }}
         className="text-dark-200/70 max-w-lg text-sm min-[430px]:text-base md:max-w-3xl dark:text-stone-200/70"
       >
-        I&apos;m proficient in a range of modern technologies that empower me
-        to build highly functional solutions. These are some of my main
-        technologies.
+        As a student, I&apos;ve been learning and experimenting with various tech stacks
+        that help me bring my project ideas to life. Here are the technologies I&apos;ve 
+        mastered during my studies.
       </motion.p>
       </div>
 

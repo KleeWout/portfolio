@@ -30,10 +30,10 @@ export const techCardsItems = [
     bgColor: 'bg-[#0EA5E9]/20',
   },
   {
-    name: 'Git',
-    description: 'Version control',
-    imageUrl: '/assets/logos/git.svg',
-    bgColor: 'bg-[#F1502F]/20',
+    name: 'Arduino',
+    description: 'Open-source electronics platform',
+    imageUrl: '/assets/logos/arduino.svg',
+    bgColor: 'bg-[#159ba1]/20',
   },
   {
     name: 'Azure',
@@ -42,10 +42,10 @@ export const techCardsItems = [
     bgColor: 'bg-[#005786]/20',
   },
   {
-    name: 'NodeJS',
-    description: 'Backend',
-    imageUrl: '/assets/logos/node-js.svg',
-    bgColor: 'bg-[#689F63]/30',
+    name: 'MySQL',
+    description: 'Database management system',
+    imageUrl: '/assets/logos/mysql.svg',
+    bgColor: 'bg-[#00546b]/30',
   },
   {
     name: 'MongoDB',
@@ -60,9 +60,9 @@ export const techCardsItems = [
     bgColor: 'bg-[#f8f9fc]/90',
   },
   {
-    name: 'PostgreSQL',
-    description: 'OR database system',
-    imageUrl: '/assets/logos/postgresql.svg',
-    bgColor: 'bg-[#336791]/20',
+    name: 'DotNet',
+    description: 'Framework for building applications',
+    imageUrl: '/assets/logos/dotnet.svg',
+    bgColor: 'bg-[#512bd4]',
   },
 ]

@@ -6,31 +6,27 @@ import {
   IconBrandGithub,
   IconHome,
   IconBrandLinkedin,
-  IconWorldWww,
   IconMailSpark,
+  IconFolders,
 } from '@tabler/icons-react'
 import Hero from './pages/Hero'
 import { FloatingHeader } from './components/ui/floating-header'
 import Projects from './components/Projects'
 import Skills from './components/Skills'
-import { useTheme } from 'next-themes'
-
-// import TechStack from "./pages/TechStack";
-// import Footer from "./pages/Footer";
-// import Hack from "./pages/Hack";
-// import useCustomCursor from "./hooks/useCustomCursor";
+import useCustomCursor from './hooks/useCustomCursor'
+import Footer from './components/Footer'
 
 export default function Page() {
-  const { setTheme} = useTheme()
-  // const { CURSOR_SIZE, setHovered, smoothMouse } = useCustomCursor();
+  const { CURSOR_SIZE, setHovered, smoothMouse } = useCustomCursor()
 
   //see when the home and footer are in view --> animations
   const homeRef = useRef<HTMLDivElement>(null)
   const footerRef = useRef<HTMLDivElement>(null)
+  const projectsRef = useRef<HTMLDivElement>(null)
 
   //true when 75% of the element is in view
   const isHomeInView = useInView(homeRef, { amount: 0.75 })
-  const isFooterInView = useInView(footerRef, { amount: 0.1 })
+  const isFooterInView = useInView(footerRef, { amount: 0.2 })
 
   //Animation states for Framer Motion component
   const variants = {
@@ -57,9 +53,16 @@ export default function Page() {
     {
       title: 'Projects',
       icon: (
-        <IconWorldWww className="h-full w-full text-black dark:text-white" />
+        <IconFolders className="h-full w-full text-black dark:text-white" />
       ),
-      href: '#projects', // scrolls to Projects section TODO: smooth scroll
+      href: '#projects',
+      onClick: (e: React.MouseEvent) => {
+        e.preventDefault()
+        projectsRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
+      },
     },
     {
       title: 'Contact',
@@ -74,7 +77,7 @@ export default function Page() {
       icon: (
         <IconBrandLinkedin className="h-full w-full text-black dark:text-white" />
       ),
-      href: '/',
+      href: 'https://www.linkedin.com/in/wout-klee-454513365/',
     },
 
     {
@@ -82,7 +85,7 @@ export default function Page() {
       icon: (
         <IconBrandGithub className="h-full w-full text-black dark:text-white" />
       ),
-      href: '',
+      href: 'https://github.com/KleeWout',
     },
   ]
 
@@ -96,34 +99,32 @@ export default function Page() {
       >
         <FloatingHeader items={links} />
       </motion.div>
-      <div ref={homeRef}>
+      <div ref={homeRef} className="m-auto max-w-7xl">
         <Hero />
       </div>
 
-      <Projects />
-      <Skills />
-      <div className="flex gap-4 p-4">
-        <button
-          onClick={() => setTheme('light')}
-          className="rounded-md bg-neutral-200 px-4 py-2 text-neutral-800 hover:bg-neutral-300"
-        >
-          Light
-        </button>
-        <button
-          onClick={() => setTheme('dark')}
-          className="rounded-md bg-neutral-800 px-4 py-2 text-neutral-200 hover:bg-neutral-700"
-        >
-          Dark
-        </button>
+      <div ref={projectsRef}>
+        <Projects />
       </div>
-
-      {/* <TechStack /> */}
-      {/* <Hack /> */}
-      {/* <Footer ref={footerRef} /> */}
-      {/* custom mouse */}
-      {/* <motion.div initial={false} animate={{width: CURSOR_SIZE, height: CURSOR_SIZE, }} style={{top: smoothMouse.y, left: smoothMouse.x,}} transition={{type: "spring",damping: 20,stiffness: 300,}}className="hidden md:block bg-blue-500 rounded-full fixed pointer-events-none"></motion.div> */}
-
-      {/* <Analytics /> */}
+      <Skills />
+      <Footer ref={footerRef} />
+      <motion.div
+        initial={false}
+        animate={{
+          width: CURSOR_SIZE,
+          height: CURSOR_SIZE,
+        }}
+        style={{
+          top: smoothMouse.y,
+          left: smoothMouse.x,
+        }}
+        transition={{
+          type: 'spring',
+          damping: 20,
+          stiffness: 300,
+        }}
+        className="pointer-events-none fixed hidden rounded-full border border-[#33a3f4] bg-white/10 md:block dark:border-[#a78bfa]"
+      ></motion.div>
     </div>
   )
 }

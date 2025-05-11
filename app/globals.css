@@ -8,7 +8,7 @@
 
 :root {
   /* shadcn vars */
-  --border-color: #cdcbcb;
+  --border-color: #33a3f4;
   --tertiary: #f8f8f8;
   --radius: 0.625rem;
   --card: oklch(1 0 0);
@@ -81,7 +81,7 @@
     --background: #0a0a0a;
     --foreground: #ededed;
     --grid-color: rgb(41, 37, 53);
-    --text-color: blue;
+    --img-border-color: #a78bfa;
     /* --background: 240 10% 3.9%;
     --foreground: 0 0% 98%; */
     /* 
@@ -115,6 +115,7 @@
 @theme inline {
   /* TextColor */
   --color-text: var(--text-color);
+  --img-border-color: var(--border-color);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -178,14 +179,15 @@
   }
 }
 
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
     --grid-color: rgb(41, 37, 53);
     --text-color: blue;
+    --border-color: #a78bfa;
   }
-} */
+}
 
 .hero-body {
   display: flex;
@@ -201,17 +203,17 @@
 
 .hero-img {
   background-size: 100%;
-  /* background-image: url('/assets/pfp.jpg'); */
+  background-image: url('/assets/pfp.jpg');
   background-repeat: no-repeat;
   background-position-y: 20%;
   background-position-x: 40%;
   animation: morph 8s ease-in-out infinite;
-  border: 4px solid #2d2e32;
+  border: 4px solid var(--img-border-color);
   border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
-  height: 40rem;
+  height: 30rem;
   transition: all 1s ease-in-out;
-  width: 30rem;
-  margin: auto;
+  width: 20rem;
+  
 }
 @keyframes morph {
   50% {

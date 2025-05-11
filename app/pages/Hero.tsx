@@ -3,17 +3,40 @@ import { headerLeftVariants } from '../components/variants'
 import { motion, useInView } from 'framer-motion'
 import Typewriter from '../components/Typewriter'
 import { AuroraText } from '@/components/magicui/aurora-text'
-import { forwardRef, useRef } from 'react'
+import { forwardRef, useRef, useState, useEffect } from 'react'
+import { useTheme } from 'next-themes'
 
 const Hero = forwardRef<HTMLDivElement, object>(() => {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: false, amount: 0.4 })
+  const { theme, resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  // Set mounted to true after component mounts to avoid hydration issues
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Define theme-based colors
+  const getLightColors = () => ['#0475f3', '#27a5f6'] // Blue for light mode
+  const getDarkColors = () => ['#8b5cf6', '#a78bfa'] // Purple for dark mode
+
+  // Use the appropriate colors based on the current theme
+  const getColors = () => {
+    if (!mounted) return getLightColors() // Default to light colors before mounting
+    return theme === 'dark' || resolvedTheme === 'dark'
+      ? getDarkColors()
+      : getLightColors()
+  }
+
   return (
-   
-    <div ref={ref} className="flex h-screen items-center gap-0.5 lg:px-12">
+    <div
+      ref={ref}
+      className="flex h-screen max-w-7xl flex-col items-center gap-0.5 md:flex-row lg:px-12"
+    >
       {/* Image */}
       {/* Text */}
-      <div className="hero-img flex"></div>
+      <div className="hero-img m-auto flex sm:m-32 sm:max-h-[40rem] sm:max-w-[30rem]"></div>
       <div className="text-center md:max-w-2xl lg:text-left">
         <motion.h1
           initial="initial"
@@ -25,18 +48,16 @@ const Hero = forwardRef<HTMLDivElement, object>(() => {
           <span className="wave-animation img waving hand mx-2 mr-0 ml-0 sm:-ml-2 md:-ml-4">
             👋
           </span>
-          , I&apos;m{' '}
-          <AuroraText colors={['#0475f3', '#27a5f6']}>Wout Klee</AuroraText>
+          , I&apos;m <AuroraText colors={getColors()}>Wout Klee</AuroraText>
         </motion.h1>
-
         <motion.h2
           initial="initial"
           animate={isInView ? 'animate' : 'initial'}
           variants={headerLeftVariants}
-          className="mb-3 text-left text-xl font-semibold text-[#171717] md:text-2xl xl:text-3xl dark:text-white"
+          className="mb-3 text-center text-xl font-semibold text-[#171717] md:text-left md:text-2xl xl:text-3xl dark:text-white"
         >
           Junior{' '}
-          <AuroraText colors={['#0475f3', '#27a5f6']}>
+          <AuroraText colors={getColors()} className="font-bold">
             <Typewriter
               words={[
                 'Full Stack Developer',
@@ -47,16 +68,17 @@ const Hero = forwardRef<HTMLDivElement, object>(() => {
             />
           </AuroraText>
         </motion.h2>
+
         <motion.p
           initial="initial"
           animate={isInView ? 'animate' : 'initial'}
           variants={headerLeftVariants}
-          className="dark:text-foreground max-w-xl text-xl md:text-lg xl:text-xl"
+          className="mb-16 max-w-xl text-xl md:mb-0 md:text-lg xl:text-xl"
         >
           I&apos;m a 20 year old Belgian web developer, currently studying{' '}
           <a
             href="https://mct.be/"
-            className="text-own-primary-500 hover:text-own-primary-600 dark:text-own-primary-400 dark:ring-own-neutral-200 dark:hover:text-own-primary-500"
+            className="font-bold text-[#33a3f4] hover:underline dark:text-[#a78bfa]"
             target="_blank"
           >
             MCT
@@ -65,7 +87,6 @@ const Hero = forwardRef<HTMLDivElement, object>(() => {
         </motion.p>
       </div>
     </div>
-    // </motion.div>
   )
 })
 

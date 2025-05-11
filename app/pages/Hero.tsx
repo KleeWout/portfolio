@@ -5,9 +5,7 @@ import Typewriter from '../components/Typewriter'
 import { AuroraText } from '@/components/magicui/aurora-text'
 import { forwardRef, useRef } from 'react'
 
-
-
-const Hero = forwardRef<HTMLDivElement, {}>((props, forwardedRef) => {
+const Hero = forwardRef<HTMLDivElement, object>(() => {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: false, amount: 0.4 })
   return (
@@ -27,7 +25,7 @@ const Hero = forwardRef<HTMLDivElement, {}>((props, forwardedRef) => {
           <span className="wave-animation img waving hand mx-2 mr-0 ml-0 sm:-ml-2 md:-ml-4">
             👋
           </span>
-          , I'm{' '}
+          , I&apos;m{' '}
           <AuroraText colors={['#0475f3', '#27a5f6']}>Wout Klee</AuroraText>
         </motion.h1>
 
@@ -55,7 +53,7 @@ const Hero = forwardRef<HTMLDivElement, {}>((props, forwardedRef) => {
           variants={headerLeftVariants}
           className="dark:text-foreground max-w-xl text-xl md:text-lg xl:text-xl"
         >
-          I'm a 20 year old Belgian web developer, currently studying{' '}
+          I&apos;m a 20 year old Belgian web developer, currently studying{' '}
           <a
             href="https://mct.be/"
             className="text-own-primary-500 hover:text-own-primary-600 dark:text-own-primary-400 dark:ring-own-neutral-200 dark:hover:text-own-primary-500"
@@ -63,12 +61,14 @@ const Hero = forwardRef<HTMLDivElement, {}>((props, forwardedRef) => {
           >
             MCT
           </a>{' '}
-          (Multimedia & Creative Technologies) at Howest.
+          (Multimedia &amp; Creative Technologies) at Howest.
         </motion.p>
       </div>
     </div>
     // </motion.div>
   )
 })
+
+Hero.displayName = 'Hero'
 
 export default Hero

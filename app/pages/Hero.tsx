@@ -5,6 +5,7 @@ import Typewriter from '../components/Typewriter'
 import { AuroraText } from '@/components/magicui/aurora-text'
 import { forwardRef, useRef, useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
+import Image from 'next/image'
 
 const Hero = forwardRef<HTMLDivElement, object>(() => {
   const ref = useRef<HTMLDivElement>(null)
@@ -34,9 +35,17 @@ const Hero = forwardRef<HTMLDivElement, object>(() => {
       ref={ref}
       className="flex h-screen max-w-7xl flex-col items-center gap-0.5 md:flex-row lg:px-12"
     >
-      {/* Image */}
-      {/* Text */}
-      <div className="hero-img m-auto flex sm:m-32 sm:max-h-[40rem] sm:max-w-[30rem]"></div>
+      <div className="relative m-auto h-[300px] w-[300px] sm:m-32 sm:h-[400px] sm:w-[400px]">
+        <Image
+          src="/assets/pfp.jpg" 
+          alt="Wout Klee portrait"
+          fill
+          sizes="(max-width: 640px) 300px, 400px"
+          priority //  loads the image immediately 
+          className="hero-img object-cover"
+          quality={80} // Adjust quality to balance between performance and appearance
+        />
+      </div>
       <div className="text-center md:max-w-2xl lg:text-left">
         <motion.h1
           initial="initial"

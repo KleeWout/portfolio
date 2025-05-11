@@ -202,11 +202,6 @@
 }
 
 .hero-img {
-  background-size: 100%;
-  background-image: url('/assets/pfp.jpg');
-  background-repeat: no-repeat;
-  background-position-y: 20%;
-  background-position-x: 40%;
   animation: morph 8s ease-in-out infinite;
   border: 4px solid var(--img-border-color);
   border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;

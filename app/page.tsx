@@ -17,7 +17,7 @@ import useCustomCursor from './hooks/useCustomCursor'
 import Footer from './components/Footer'
 
 export default function Page() {
-  const { CURSOR_SIZE, setHovered, smoothMouse } = useCustomCursor()
+  const { CURSOR_SIZE, smoothMouse } = useCustomCursor()
 
   //see when the home and footer are in view --> animations
   const homeRef = useRef<HTMLDivElement>(null)

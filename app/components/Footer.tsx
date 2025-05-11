@@ -1,5 +1,6 @@
 import React from 'react'
-interface FooterProps {}
+
+type FooterProps = React.HTMLProps<HTMLDivElement>
 
 const Footer = React.forwardRef<HTMLDivElement, FooterProps>((props, ref) => {
   return (
@@ -18,5 +19,8 @@ const Footer = React.forwardRef<HTMLDivElement, FooterProps>((props, ref) => {
     </footer>
   )
 })
+
+// Add display name to fix the react/display-name error
+Footer.displayName = 'Footer'
 
 export default Footer

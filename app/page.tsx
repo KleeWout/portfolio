@@ -123,7 +123,7 @@ export default function Page() {
           damping: 20,
           stiffness: 300,
         }}
-        className="pointer-events-none fixed hidden rounded-full border border-[#33a3f4] bg-white/10 md:block dark:border-[#a78bfa]"
+        className="pointer-events-none fixed z-60 hidden rounded-full border border-[#33a3f4] bg-white/10 md:block dark:border-[#a78bfa]"
       ></motion.div>
     </div>
   )

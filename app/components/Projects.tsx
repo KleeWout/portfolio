@@ -33,7 +33,7 @@ export default function Projects() {
     <div
       ref={container}
       id="projects"
-      className="cursor-auto border-y border-gray-800 bg-slate-50 px-6 pt-16 pb-8 md:cursor-none dark:border-gray-200 dark:bg-neutral-900"
+      className="cursor-auto border-y border-gray-800 bg-slate-50 px-6 pt-16 pb-8 dark:border-gray-200 dark:bg-neutral-900"
     >
       <h1 className="mt-5 mb-10 text-center text-3xl font-bold tracking-widest break-words text-white uppercase mix-blend-difference sm:text-4xl md:text-5xl lg:text-6xl">
         Projects

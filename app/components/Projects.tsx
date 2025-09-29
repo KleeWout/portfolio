@@ -47,22 +47,13 @@
 
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { projects } from '../data'
-
-interface Project {
-  id: string
-  title: string
-  imagePath: string
-  technologies: string[]
-  link: string
-}
 
 export default function HorizontalScrollProjects() {
   const containerRef = useRef<HTMLDivElement>(null)
   const scrollerRef = useRef<HTMLDivElement>(null)
-  const [isScrolling, setIsScrolling] = useState(false)
 
   useEffect(() => {
     const container = containerRef.current
@@ -86,16 +77,12 @@ export default function HorizontalScrollProjects() {
 
       // Check if we're in the scrolling zone
       if (scrollY >= scrollStart && scrollY <= scrollEnd) {
-        setIsScrolling(true)
-
         // Calculate progress through the horizontal scroll (0 to 1)
         const progress = (scrollY - scrollStart) / (scrollEnd - scrollStart)
 
         // Apply horizontal translation
         const translateX = progress * scrollableWidth
         scroller.style.transform = `translateX(-${translateX}px)`
-      } else {
-        setIsScrolling(false)
       }
     }
 

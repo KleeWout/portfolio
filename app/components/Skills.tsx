@@ -5,9 +5,8 @@ import {
   backendTechStack,
   cloudTechStack,
   frontendTechStack,
-  techCardsItems,
 } from '../../lib/constants'
-import { TechCard, SkillCard } from './TechCard'
+import { SkillCard } from './TechCard'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 

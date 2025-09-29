@@ -1,7 +1,17 @@
 export const projects = [
   {
+    id: 0,
+    title: 'Deelkast - Deelfabriek',
+    subtitle: 'Industry project',
+    technologies: ['NextJs', 'DotNet', 'python', 'IoT', 'Cloudflare'],
+    description: `Deelfabriek is a Belgian non-profit organization that promotes sharing and sustainability by providing shared resources to communities. For their project "Deelkast", I developed a web application using Next.js and .NET for the backend. The app allows users to easily share and borrow items within their community, promoting a circular economy. Additionally, I integrated IoT technology to manage access to the physical Deelkast, ensuring secure and convenient item exchanges. The project emphasizes user experience, security, and scalability to accommodate future growth.`,
+    link: '/projects/deelfabriek',
+    imagePath: '/assets/projects/deelfabriek-mockup.png',
+  },
+
+  {
     id: 1,
-    name: 'Interactieve Fiets',
+    title: 'Interactieve Fiets',
     subtitle: 'Team project',
     technologies: ['C++', 'Azure', 'JavaScript', 'C#', 'Unity'],
     description: `This interactive cycling game was developed in for 'SportCampus Brugge' as part of a school project. The challenge was to make riding a home trainer more engaging and fun. We created a game where players control an in-game boat through real-world pedaling to motivates users to stay active while enjoying a unique and interactive experience.`,
@@ -10,16 +20,7 @@ export const projects = [
   },
   {
     id: 2,
-    name: 'Smart Organizer',
-    subtitle: 'Project One',
-    technologies: ['Arduino', 'Python', 'HTML/CSS', 'MySQL', 'Flask'],
-    description: `At the end of the 1st year of MCT, i had to create a project to show what i learned. I chose to build a smart organizer that is connected to a MySQL database so you can store what items are inside. When needing an item, you could search it up on the website and select it. Afterwards the cabinet of the drawer would light up and open up.`,
-    link: 'https://www.instructables.com/SmartOrganzer/',
-    imagePath: '/assets/projects/project-2.png',
-  },
-  {
-    id: 3,
-    name: 'Portfolio Website',
+    title: 'Portfolio Website',
     technologies: ['NexJs', 'React', 'Typescript', 'TailWindCSS'],
     subtitle: 'Frontend Development',
     description: `This portfolio was developed for the Frontend Development module using TypeScript, Next.js, and React. It showcases my skills in modern web technologies, emphasizing performance, scalability, and clean design.`,
@@ -28,8 +29,17 @@ export const projects = [
     imagePathDark: '/assets/projects/portfolio-dark.png',
   },
   {
+    id: 3,
+    title: 'Cel WOII Zonnebeke',
+    technologies: ['HTML', 'CSS', 'PHP'],
+    subtitle: 'Projects',
+    description: `A family member involved in a local VZW (non-profit organization) focused on World War II history in our region asked me to create a simple website to showcase their mission and upcoming events. The site is currently built with HTML and PHP, as the hosting provider only supports PHP-based applications. Although the current version is quite basic, I plan to completely redesign it using Next.js and React, applying the skills and concepts I've learned this year to enhance its functionality and user experience.`,
+    link: 'https://celwo2.be',
+    imagePath: '/assets/projects/celWo2-mockup.png',
+  },
+  {
     id: 4,
-    name: 'Receipt Scanner App',
+    title: 'Receipt Scanner App',
     technologies: ['Flutter', 'Dart', 'Firebase', 'Figma'],
     subtitle: 'Smart App Development',
     description: `For the module Smart App Development, i had to design and create an myself. Because i always lose my receipts did I choose to make an app where you can scan receipts. In this app you can scan a receipt, add your items and upload it to a group the cloud. You can also share your group with other people can also add receipts to that group to track group expenses.`,
@@ -40,11 +50,11 @@ export const projects = [
 
   {
     id: 5,
-    name: 'Cel WOII Zonnebeke',
-    technologies: ['HTML', 'CSS', 'PHP'],
-    subtitle: 'Projects',
-    description: `A family member involved in a local VZW (non-profit organization) focused on World War II history in our region asked me to create a simple website to showcase their mission and upcoming events. The site is currently built with HTML and PHP, as the hosting provider only supports PHP-based applications. Although the current version is quite basic, I plan to completely redesign it using Next.js and React, applying the skills and concepts I've learned this year to enhance its functionality and user experience.`,
-    link: 'https://celwo2.be',
-    imagePath: '/assets/projects/project-5.png',
+    title: 'Smart Organizer',
+    subtitle: 'Project One',
+    technologies: ['Arduino', 'Python', 'HTML/CSS', 'MySQL', 'Flask'],
+    description: `At the end of the 1st year of MCT, i had to create a project to show what i learned. I chose to build a smart organizer that is connected to a MySQL database so you can store what items are inside. When needing an item, you could search it up on the website and select it. Afterwards the cabinet of the drawer would light up and open up.`,
+    link: 'https://www.instructables.com/SmartOrganzer/',
+    imagePath: '/assets/projects/project-2.png',
   },
 ]

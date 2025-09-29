@@ -1,5 +1,4 @@
 'use client'
-import { ReactLenis } from 'lenis/react'
 import { useEffect } from 'react'
 import Lenis from 'lenis'
 

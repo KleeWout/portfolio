@@ -1,18 +1,18 @@
 'use client'
 
-import { useRef } from 'react'
+// import { useRef } from 'react'
 import Image from 'next/image'
-import { motion, useInView } from 'framer-motion'
-import {
-  IconBrandGithub,
-  IconHome,
-  IconBrandLinkedin,
-  IconMailSpark,
-  IconFolders,
-} from '@tabler/icons-react'
-import Hero from '../../pages/Hero'
-import Projects from '../../components/Projects'
-import Skills from '../../components/Skills'
+// import { motion, useInView } from 'framer-motion'
+// import {
+//   IconBrandGithub,
+//   IconHome,
+//   IconBrandLinkedin,
+//   IconMailSpark,
+//   IconFolders,
+// } from '@tabler/icons-react'
+// import Hero from '../../pages/Hero'
+// import Projects from '../../components/Projects'
+// import Skills from '../../components/Skills'
 import Footer from '../../components/Footer'
 
 export default function Page() {
@@ -134,7 +134,7 @@ export default function Page() {
             containers correct moest configureren op de Raspberry Pi en zorgen
             voor een veilige externe toegang. Ook droeg ik bij aan de .NET
             backend waar nodig, vooral om de koppeling met de database en de
-            API's goed te laten werken.
+            API&apos;s goed te laten werken.
           </p>
           {/* Placeholder voor afbeelding */}
           <div className="my-12 flex items-center justify-center rounded-lg bg-neutral-100">

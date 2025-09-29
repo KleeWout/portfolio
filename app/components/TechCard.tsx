@@ -1,10 +1,4 @@
-import { div } from 'framer-motion/client'
 import Image from 'next/image'
-import {
-  backendTechStack,
-  cloudTechStack,
-  frontendTechStack,
-} from '../../lib/constants'
 import { useState } from 'react'
 
 const TechCard = ({

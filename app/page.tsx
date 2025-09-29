@@ -1,19 +1,19 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
-import {
-  IconBrandGithub,
-  IconHome,
-  IconBrandLinkedin,
-  IconMailSpark,
-  IconFolders,
-} from '@tabler/icons-react'
+// import { useRef } from 'react'
+// import { motion, useInView } from 'framer-motion'
+// import {
+//   IconBrandGithub,
+//   IconHome,
+//   IconBrandLinkedin,
+//   IconMailSpark,
+//   IconFolders,
+// } from '@tabler/icons-react'
 import Hero from './pages/Hero'
-import { FloatingHeader } from './components/ui/floating-header'
+// import { FloatingHeader } from './components/ui/floating-header'
 import Projects from './components/Projects'
 import Skills from './components/Skills'
-import useCustomCursor from './hooks/useCustomCursor'
+// import useCustomCursor from './hooks/useCustomCursor'
 import Footer from './components/Footer'
 
 export default function Page() {

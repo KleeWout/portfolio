@@ -25,7 +25,7 @@ export default function Page() {
           Deelfabriek Kortrijk
         </h2>
         <Image
-          src="/assets/projects/Deelfabriek/mockup2.png"
+          src="/assets/projects/deelfabriek/mockup2.png"
           alt="Deelfabriek website mockup showing interface on a tablet device"
           width={6000}
           height={4500}

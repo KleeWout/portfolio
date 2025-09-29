@@ -37,11 +37,11 @@ const Hero = forwardRef<HTMLDivElement, object>(() => {
     >
       <div className="relative m-auto h-[300px] w-[300px] sm:m-32 sm:h-[400px] sm:w-[400px]">
         <Image
-          src="/assets/pfp.jpg" 
+          src="/assets/pfp.jpg"
           alt="Wout Klee portrait"
           fill
           sizes="(max-width: 640px) 300px, 400px"
-          priority //  loads the image immediately 
+          priority //  loads the image immediately
           className="hero-img object-cover"
           quality={80} // Adjust quality to balance between performance and appearance
         />
@@ -63,7 +63,7 @@ const Hero = forwardRef<HTMLDivElement, object>(() => {
           initial="initial"
           animate={isInView ? 'animate' : 'initial'}
           variants={headerLeftVariants}
-          className="mb-3 text-center text-xl font-semibold text-[#171717] md:text-left md:text-2xl xl:text-3xl dark:text-white"
+          className="text-text-main mb-3 text-center text-xl font-semibold md:text-left md:text-2xl xl:text-3xl"
         >
           Junior{' '}
           <AuroraText colors={getColors()} className="font-bold">

@@ -1,8 +1,4 @@
 @import 'tailwindcss';
-@import 'tw-animate-css';
-@custom-variant dark (&:where(.dark, .dark *));
-
-/* @custom-variant dark (&:is(.dark *)); */
 
 @tailwind utilities;
 
@@ -47,7 +43,10 @@
     --background: #f4f4f5;
     --foreground: #171717;
 
-    --color-text: pink;
+    --grid-color: #e0e8f3;
+
+    --text-main: #171717;
+
     --grid-color: #e0e8f3;
 
     /* --card: 0 0% 100%;
@@ -80,6 +79,7 @@
   .dark {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --text-main: #ffffff;
     --grid-color: rgb(41, 37, 53);
     --img-border-color: #a78bfa;
     /* --background: 240 10% 3.9%;
@@ -115,6 +115,7 @@
 @theme inline {
   /* TextColor */
   --color-text: var(--text-color);
+  --color-text-main: var(--text-main);
   --img-border-color: var(--border-color);
 
   --color-background: var(--background);
@@ -208,12 +209,14 @@
   height: 30rem;
   transition: all 1s ease-in-out;
   width: 20rem;
-  
 }
 @keyframes morph {
   50% {
     border-radius: 30% 60% 70% 40%/50% 60% 30% 60%;
   }
+}
+html {
+  scroll-behavior: smooth;
 }
 
 .grid-background {
@@ -325,4 +328,84 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Glassmorphism utility class */
+.glass-effect {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background: color-mix(in srgb, var(--color-secondary) 60%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Alternative with your custom variables if they exist */
+.glass-effect-alt {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background: color-mix(
+    in srgb,
+    var(--color-base-2nd, var(--color-secondary)) 60%,
+    transparent
+  );
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--color-highlight, var(--color-border)) 40%,
+      transparent
+    );
+  border-radius: 16px;
+  box-shadow: 0 2px 10px #0000001a;
+}
+/* Add this to your globals.css or tailwind.css */
+
+/* Smooth page transitions */
+@layer utilities {
+  .transition-smooth {
+    transition-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+  }
+}
+
+/* Prevent layout shift during transitions */
+html {
+  overflow-x: hidden;
+}
+
+body {
+  transition: overflow 0.3s;
+}
+
+/* Optional: Custom keyframe animations for more control */
+@keyframes slideUpOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes slideDownIn {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.slide-up-out {
+  animation: slideUpOut 1s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.slide-down-in {
+  animation: slideDownIn 1s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+/* Improve performance with GPU acceleration */
+.transition-layer {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }

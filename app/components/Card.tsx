@@ -14,7 +14,7 @@ type Project = {
   description: string
   link?: string
   liveAppLink?: string
-  imagePath: string,
+  imagePath: string
   imagePathDark?: string
 }
 
@@ -37,22 +37,22 @@ const Card: React.FC<Props> = ({
   const { theme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [currentImage, setCurrentImage] = useState<string>(data.imagePath)
-  
+
   // Set mounted to true after component mounts to avoid hydration issues
   useEffect(() => {
     setMounted(true)
   }, [])
-  
+
   useEffect(() => {
-    if (!mounted) return;
-    
+    if (!mounted) return
+
     // Use resolvedTheme which is more reliable than theme
-    const currentTheme = resolvedTheme || theme;
-    
+    const currentTheme = resolvedTheme || theme
+
     if (currentTheme === 'dark' && data.imagePathDark) {
-      setCurrentImage(data.imagePathDark);
+      setCurrentImage(data.imagePathDark)
     } else {
-      setCurrentImage(data.imagePath);
+      setCurrentImage(data.imagePath)
     }
   }, [theme, resolvedTheme, data.imagePath, data.imagePathDark, mounted])
 
@@ -71,14 +71,7 @@ const Card: React.FC<Props> = ({
 
   const cardScale = useTransform(globalProgress, range, [1, targetScale])
 
-  const {
-    id,
-    description,
-    link,
-    name,
-    subtitle,
-    technologies,
-  } = data
+  const { id, description, link, name, subtitle, technologies } = data
 
   return (
     <motion.div
@@ -96,7 +89,7 @@ const Card: React.FC<Props> = ({
         style={{
           scale: cardScale,
         }}
-        className={`h-auto w-[300px] gap-4 overflow-hidden rounded-xl p-10 text-black sm:w-[500px] md:flex md:w-[1000px] md:justify-between dark:text-white ${index % 2 === 0 ? 'bg-[#eff1f4] dark:bg-[#262626]' : 'bg-[#d9dbdd] dark:bg-[#353535]'} `}
+        className={`h-auto w-[300px] gap-4 overflow-hidden rounded-xl p-10 text-black sm:w-[500px] md:flex md:w-[1000px] md:justify-between ${index % 2 === 0 ? 'bg-[#eff1f4]' : 'bg-[#d9dbdd]'} `}
       >
         <motion.div
           style={{ opacity: imageOpacity, scale: imageScale }}

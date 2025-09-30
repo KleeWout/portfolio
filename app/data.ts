@@ -44,7 +44,6 @@ export const projects = [
     description: `For the module Smart App Development, i had to design and create an myself. Because i always lose my receipts did I choose to make an app where you can scan receipts. In this app you can scan a receipt, add your items and upload it to a group the cloud. You can also share your group with other people can also add receipts to that group to track group expenses.`,
     link: 'https://github.com/KleeWout/SmartAppEindopdracht',
     imagePath: '/assets/projects/project-4-light.png',
-    imagePathDark: '/assets/projects/project-4-dark.png',
   },
 
   {

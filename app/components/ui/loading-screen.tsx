@@ -27,7 +27,7 @@ export default function LoadingScreen() {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white dark:bg-[#171717]">
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -42,9 +42,9 @@ export default function LoadingScreen() {
         </AuroraText>
 
         <div className="mt-8">
-          <motion.div className="h-1.5 w-52 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800">
+          <motion.div className="h-1.5 w-52 overflow-hidden rounded-full bg-gray-200">
             <motion.div
-              className="h-full rounded-full bg-[#33a3f4] dark:bg-[#a78bfa]"
+              className="h-full rounded-full bg-[#33a3f4]"
               initial={{ width: '0%' }}
               animate={{
                 width: '100%',

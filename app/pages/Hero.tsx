@@ -20,15 +20,15 @@ const Hero = forwardRef<HTMLDivElement, object>(() => {
 
   // Define theme-based colors
   const getLightColors = () => ['#0475f3', '#27a5f6'] // Blue for light mode
-  const getDarkColors = () => ['#8b5cf6', '#a78bfa'] // Purple for dark mode
+  // const getDarkColors = () => ['#8b5cf6', '#a78bfa'] // Purple for dark mode
 
-  // Use the appropriate colors based on the current theme
-  const getColors = () => {
-    if (!mounted) return getLightColors() // Default to light colors before mounting
-    return theme === 'dark' || resolvedTheme === 'dark'
-      ? getDarkColors()
-      : getLightColors()
-  }
+  // // Use the appropriate colors based on the current theme
+  // const getColors = () => {
+  //   if (!mounted) return getLightColors() // Default to light colors before mounting
+  //   return theme === 'dark' || resolvedTheme === 'dark'
+  //     ? getDarkColors()
+  //     : getLightColors()
+  // }
 
   return (
     <div
@@ -46,18 +46,19 @@ const Hero = forwardRef<HTMLDivElement, object>(() => {
           quality={80} // Adjust quality to balance between performance and appearance
         />
       </div>
-      <div className="text-center md:max-w-2xl lg:text-left">
+      <div className="text-text-main text-center md:max-w-2xl lg:text-left">
         <motion.h1
           initial="initial"
           animate={isInView ? 'animate' : 'initial'}
           variants={headerLeftVariants}
-          className="dark:text-foreground text-3xl font-bold md:mb-1 md:text-5xl xl:text-6xl"
+          className="text-text-main text-3xl font-bold md:mb-1 md:text-5xl xl:text-6xl"
         >
           Hi{' '}
           <span className="wave-animation img waving hand mx-2 mr-0 ml-0 sm:-ml-2 md:-ml-4">
             👋
           </span>
-          , I&apos;m <AuroraText colors={getColors()}>Wout Klee</AuroraText>
+          , I&apos;m{' '}
+          <AuroraText colors={getLightColors()}>Wout Klee</AuroraText>
         </motion.h1>
         <motion.h2
           initial="initial"
@@ -66,7 +67,7 @@ const Hero = forwardRef<HTMLDivElement, object>(() => {
           className="text-text-main mb-3 text-center text-xl font-semibold md:text-left md:text-2xl xl:text-3xl"
         >
           Junior{' '}
-          <AuroraText colors={getColors()} className="font-bold">
+          <AuroraText colors={getLightColors()} className="font-bold">
             <Typewriter
               words={[
                 'Full Stack Developer',
@@ -87,7 +88,7 @@ const Hero = forwardRef<HTMLDivElement, object>(() => {
           I&apos;m a 20 year old Belgian web developer, currently studying{' '}
           <a
             href="https://mct.be/"
-            className="font-bold text-[#33a3f4] hover:underline dark:text-[#a78bfa]"
+            className="font-bold text-[#33a3f4] hover:underline"
             target="_blank"
           >
             MCT

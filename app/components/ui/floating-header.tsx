@@ -73,7 +73,7 @@ const FloatingHeaderMobile = ({
                 <Link
                   href={item.href}
                   key={item.title}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-[#eeeeee] text-black dark:bg-neutral-800 dark:text-white"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-[#eeeeee] text-black"
                 >
                   <div className="h-4 w-4">{item.icon}</div>
                 </Link>
@@ -83,7 +83,7 @@ const FloatingHeaderMobile = ({
             {/* theme switcher */}
             <motion.div
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="relative flex aspect-square cursor-pointer items-center justify-center rounded-full bg-[#eeeeee] dark:bg-neutral-800"
+              className="relative flex aspect-square cursor-pointer items-center justify-center rounded-full bg-[#eeeeee]"
             >
               <AnimatePresence>
                 {
@@ -91,15 +91,15 @@ const FloatingHeaderMobile = ({
                     initial={{ opacity: 0, y: 10, x: '-50%' }}
                     animate={{ opacity: 1, y: 0, x: '-50%' }}
                     exit={{ opacity: 0, y: 2, x: '-50%' }}
-                    className="text:black absolute -top-8 left-1/2 w-fit -translate-x-1/2 rounded-md border border-neutral-100 bg-neutral-200 px-2 py-0.5 text-xs whitespace-pre dark:border-neutral-900 dark:bg-neutral-800 dark:text-white"
+                    className="text:black absolute -top-8 left-1/2 w-fit -translate-x-1/2 rounded-md border border-neutral-100 bg-neutral-200 px-2 py-0.5 text-xs whitespace-pre"
                   >
                     {`${theme === 'dark' ? 'Light' : 'Dark'} Theme`}
                   </motion.div>
                 }
               </AnimatePresence>
               <motion.div className="flex items-center justify-center">
-                <IconSun className="hidden text-white dark:block" />
-                <IconMoon className="block text-black dark:hidden" />
+                <IconSun className="hidden text-white" />
+                <IconMoon className="block text-black" />
               </motion.div>
             </motion.div>
           </motion.div>
@@ -107,7 +107,7 @@ const FloatingHeaderMobile = ({
       </AnimatePresence>
       <button
         onClick={() => setOpen(!open)}
-        className="flex h-10 w-10 items-center justify-center rounded-full border border-[#33a3f4] bg-[#f8fafc] text-black dark:border-[#a78bfa] dark:bg-neutral-900 dark:text-white"
+        className="flex h-10 w-10 items-center justify-center rounded-full border border-[#33a3f4] bg-[#f8fafc] text-black"
         aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
         aria-expanded={open}
         aria-controls="mobile-navigation"
@@ -131,7 +131,7 @@ const FloatingHeaderDesktop = ({
       onMouseMove={e => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        'mx-auto hidden h-16 items-end gap-4 rounded-2xl border border-[#33a3f4] bg-[#f8fafc] p-2.5 px-4 pb-3 transition-colors duration-200 hover:border-[#33a4f494] md:flex dark:border-[#a78bfa] dark:bg-neutral-900 dark:hover:border-[#8978c5]',
+        'mx-auto hidden h-16 items-end gap-4 rounded-2xl border border-[#33a3f4] bg-[#f8fafc] p-2.5 px-4 pb-3 transition-colors duration-200 hover:border-[#33a4f494] md:flex',
         className,
       )}
     >
@@ -207,7 +207,7 @@ function IconContainer({
         style={{ width, height }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="relative flex aspect-square items-center justify-center rounded-full bg-[#eeeeee] dark:bg-neutral-800"
+        className="relative flex aspect-square items-center justify-center rounded-full bg-[#eeeeee]"
       >
         <AnimatePresence>
           {hovered && (
@@ -215,7 +215,7 @@ function IconContainer({
               initial={{ opacity: 0, y: 10, x: '-50%' }}
               animate={{ opacity: 1, y: 0, x: '-50%' }}
               exit={{ opacity: 0, y: 2, x: '-50%' }}
-              className="absolute -top-8 left-1/2 w-fit -translate-x-1/2 rounded-md border border-neutral-100 bg-neutral-200 px-2 py-0.5 text-xs whitespace-pre text-black dark:border-neutral-900 dark:bg-neutral-800 dark:text-white"
+              className="absolute -top-8 left-1/2 w-fit -translate-x-1/2 rounded-md border border-neutral-100 bg-neutral-200 px-2 py-0.5 text-xs whitespace-pre text-black"
             >
               {title}
             </motion.div>
@@ -286,7 +286,7 @@ function ThemeSwitcher({ mouseX }: { mouseX: MotionValue }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="relative flex aspect-square cursor-pointer items-center justify-center rounded-full bg-[#eeeeee] dark:bg-neutral-800"
+      className="relative flex aspect-square cursor-pointer items-center justify-center rounded-full bg-[#eeeeee]"
     >
       <AnimatePresence>
         {hovered && (
@@ -294,7 +294,7 @@ function ThemeSwitcher({ mouseX }: { mouseX: MotionValue }) {
             initial={{ opacity: 0, y: 10, x: '-50%' }}
             animate={{ opacity: 1, y: 0, x: '-50%' }}
             exit={{ opacity: 0, y: 2, x: '-50%' }}
-            className="text:black absolute -top-8 left-1/2 w-fit -translate-x-1/2 rounded-md border border-neutral-100 bg-neutral-200 px-2 py-0.5 text-xs whitespace-pre dark:border-neutral-900 dark:bg-neutral-800 dark:text-white"
+            className="text:black absolute -top-8 left-1/2 w-fit -translate-x-1/2 rounded-md border border-neutral-100 bg-neutral-200 px-2 py-0.5 text-xs whitespace-pre"
           >
             {`${theme === 'dark' ? 'Light' : 'Dark'} Theme`}
           </motion.div>
@@ -304,8 +304,8 @@ function ThemeSwitcher({ mouseX }: { mouseX: MotionValue }) {
         style={{ width: widthIcon, height: heightIcon }}
         className="flex items-center justify-center"
       >
-        <IconSun className="hidden text-white dark:block" />
-        <IconMoon className="block text-black dark:hidden" />
+        <IconSun className="hidden text-white" />
+        <IconMoon className="block text-black" />
       </motion.div>
     </motion.div>
   )

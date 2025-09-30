@@ -50,7 +50,7 @@ export default function NotFound() {
       </motion.h2>
 
       <motion.p
-        className="mt-4 max-w-md text-lg text-gray-600 dark:text-gray-400"
+        className="mt-4 max-w-md text-lg text-gray-600"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.4 }}
@@ -66,7 +66,7 @@ export default function NotFound() {
       >
         <Link
           href="/"
-          className="flex items-center justify-center rounded-lg border border-[#33a3f4] bg-[#f8fafc] px-5 py-2.5 text-center text-sm font-medium text-black transition-colors hover:bg-[#e8f4fd] dark:border-[#a78bfa] dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800"
+          className="flex items-center justify-center rounded-lg border border-[#33a3f4] bg-[#f8fafc] px-5 py-2.5 text-center text-sm font-medium text-black transition-colors hover:bg-[#e8f4fd]"
         >
           <IconHome className="mr-2 h-5 w-5" />
           Back to Home
@@ -74,7 +74,7 @@ export default function NotFound() {
 
         <button
           onClick={() => window.history.back()}
-          className="flex items-center justify-center rounded-lg border border-[#33a3f4] bg-transparent px-5 py-2.5 text-center text-sm font-medium text-black transition-colors hover:bg-[#f8fafc] dark:border-[#a78bfa] dark:text-white dark:hover:bg-neutral-900"
+          className="flex items-center justify-center rounded-lg border border-[#33a3f4] bg-transparent px-5 py-2.5 text-center text-sm font-medium text-black transition-colors hover:bg-[#f8fafc]"
         >
           <IconArrowLeft className="mr-2 h-5 w-5" />
           Go Back

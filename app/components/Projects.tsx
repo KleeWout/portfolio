@@ -120,7 +120,7 @@ export default function HorizontalScrollProjects() {
             <a
               key={project.id}
               href={project.link}
-              className="relative h-[600px] w-[900px] flex-shrink-0"
+              className="relative h-[600px] w-[332px] flex-shrink-0 lg:w-[900px]"
             >
               <div className="relative h-full w-full overflow-hidden rounded-lg">
                 <Image

@@ -81,7 +81,7 @@
     --foreground: #ededed;
     --text-main: #ffffff;
     --grid-color: rgb(41, 37, 53);
-    --img-border-color: #a78bfa;
+    /* --img-border-color: #a78bfa; */
     /* --background: 240 10% 3.9%;
     --foreground: 0 0% 98%; */
     /* 
@@ -179,16 +179,16 @@
     }
   }
 }
-
+/* 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
     --grid-color: rgb(41, 37, 53);
     --text-color: blue;
-    --border-color: #a78bfa;
+    --border-color: #a78bfa; 
   }
-}
+} */
 
 .hero-body {
   display: flex;

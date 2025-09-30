@@ -32,13 +32,13 @@ export default function Page() {
   // const links = [
   //   {
   //     title: 'Home',
-  //     icon: <IconHome className="h-full w-full text-black dark:text-white" />,
+  //     icon: <IconHome className="h-full w-full text-black " />,
   //     href: '/',
   //   },
   //   {
   //     title: 'Projects',
   //     icon: (
-  //       <IconFolders className="h-full w-full text-black dark:text-white" />
+  //       <IconFolders className="h-full w-full text-black " />
   //     ),
   //     href: '#projects',
   //     onClick: (e: React.MouseEvent) => {
@@ -52,7 +52,7 @@ export default function Page() {
   //   {
   //     title: 'Contact',
   //     icon: (
-  //       <IconMailSpark className="h-full w-full text-black dark:text-white" />
+  //       <IconMailSpark className="h-full w-full text-black " />
   //     ),
   //     href: 'mailto:wout.klee1@gmail.com',
   //   },
@@ -60,7 +60,7 @@ export default function Page() {
   //   {
   //     title: 'LinkedIn',
   //     icon: (
-  //       <IconBrandLinkedin className="h-full w-full text-black dark:text-white" />
+  //       <IconBrandLinkedin className="h-full w-full text-black " />
   //     ),
   //     href: 'https://www.linkedin.com/in/wout-klee-454513365/',
   //   },
@@ -68,7 +68,7 @@ export default function Page() {
   //   {
   //     title: 'GitHub',
   //     icon: (
-  //       <IconBrandGithub className="h-full w-full text-black dark:text-white" />
+  //       <IconBrandGithub className="h-full w-full text-black " />
   //     ),
   //     href: 'https://github.com/KleeWout',
   //   },

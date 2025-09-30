@@ -20,7 +20,7 @@ export default function Page() {
     <div>
       <div className="m-auto max-w-7xl px-4">
         <h1 className="mt-26 font-semibold">Team Project 2025</h1>
-        <h2 className="mt-4 text-7xl font-bold">
+        <h2 className="mt-4 text-2xl font-bold md:text-4xl lg:text-7xl">
           Entertainende Fietsgame - <br />
           SportInnovatieCampus Brugge
         </h2>

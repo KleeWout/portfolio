@@ -20,7 +20,7 @@ export default function Page() {
     <div>
       <div className="m-auto max-w-7xl px-4">
         <h1 className="mt-26 font-semibold">Industry Project 2025</h1>
-        <h2 className="mt-4 text-7xl font-bold">
+        <h2 className="mt-4 text-2xl font-bold md:text-4xl lg:text-7xl">
           Deelkast - <br />
           Deelfabriek Kortrijk
         </h2>
@@ -105,20 +105,20 @@ export default function Page() {
             </li>
           </ul>
           {/* Placeholder voor afbeelding */}
-          <div className="my-12 flex items-center justify-center gap-22 rounded-lg bg-neutral-100">
+          <div className="my-12 flex flex-col items-center justify-center gap-4 rounded-lg bg-neutral-100 p-4 md:flex-row md:gap-8 md:p-8 lg:gap-12">
             <Image
               src={'/assets/projects/deelfabriek/kast1.webp'}
               alt="Deelfabriek kast"
               width={503}
               height={600}
-              className="rounded-lg"
+              className="h-auto w-full max-w-md rounded-lg object-cover md:w-1/2"
             />
             <Image
               src={'/assets/projects/deelfabriek/kastopen.webp'}
               alt="Deelfabriek kast open"
               width={503}
               height={600}
-              className="rounded-lg"
+              className="h-auto w-full max-w-md rounded-lg object-cover md:w-1/2"
             />
           </div>
           <h4 className="mt-12 mb-6 text-2xl font-semibold">

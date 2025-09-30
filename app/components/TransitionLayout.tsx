@@ -24,7 +24,7 @@ export default function PageTransition() {
 
   return (
     <div
-      className={`absolute top-0 right-0 left-0 h-screen bg-[#d9d7cb] transition-transform duration-1200 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      className={`absolute top-0 right-0 left-0 h-[50vh] bg-[#d9d7cb] transition-transform duration-1200 ease-[cubic-bezier(0.16,1,0.3,1)] md:h-[70vh] lg:h-screen ${
         isAnimating ? 'z-10 translate-y-full' : '-z-10 translate-y-0'
       }`}
     />

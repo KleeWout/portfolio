@@ -3,8 +3,7 @@ import { headerLeftVariants } from '../components/variants'
 import { motion, useInView } from 'framer-motion'
 import Typewriter from '../components/Typewriter'
 import { AuroraText } from '@/components/magicui/aurora-text'
-import { forwardRef, useRef, useState, useEffect } from 'react'
-import { useTheme } from 'next-themes'
+import { forwardRef, useRef } from 'react'
 import Image from 'next/image'
 
 const Hero = forwardRef<HTMLDivElement, object>(() => {

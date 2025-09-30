@@ -10,13 +10,8 @@ import Image from 'next/image'
 const Hero = forwardRef<HTMLDivElement, object>(() => {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: false, amount: 0.4 })
-  const { theme, resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
 
   // Set mounted to true after component mounts to avoid hydration issues
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   // Define theme-based colors
   const getLightColors = () => ['#0475f3', '#27a5f6'] // Blue for light mode

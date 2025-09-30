@@ -15,7 +15,7 @@ export const projects = [
     subtitle: 'Team project',
     technologies: ['C++', 'Azure', 'JavaScript', 'C#', 'Unity'],
     description: `This interactive cycling game was developed in for 'SportCampus Brugge' as part of a school project. The challenge was to make riding a home trainer more engaging and fun. We created a game where players control an in-game boat through real-world pedaling to motivates users to stay active while enjoying a unique and interactive experience.`,
-    link: 'https://github.com/KleeWout/Interactieve-fiets',
+    link: '/projects/entertainende-fietsgame',
     imagePath: '/assets/projects/project-1.png',
   },
   {

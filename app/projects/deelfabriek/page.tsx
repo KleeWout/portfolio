@@ -19,7 +19,7 @@ export default function Page() {
   return (
     <div>
       <div className="m-auto max-w-7xl px-4">
-        <h1 className="mt-26 font-semibold">Industry project 2025</h1>
+        <h1 className="mt-26 font-semibold">Industry Project 2025</h1>
         <h2 className="mt-4 text-7xl font-bold">
           Deelkast - <br />
           Deelfabriek Kortrijk

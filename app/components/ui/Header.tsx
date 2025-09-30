@@ -87,12 +87,12 @@ export default function Header() {
               About me
             </Link> */
             }
-            <Link
-              href="/contact"
+            <a
+              href="mailto:wout.klee1@gmail.com"
               className="text-main font-semibold transition-colors hover:text-gray-700"
             >
               Contact
-            </Link>
+            </a>
           </nav>
 
           {/* Mobile Menu Button */}

@@ -24,9 +24,8 @@ export const projects = [
     technologies: ['NexJs', 'React', 'Typescript', 'TailWindCSS'],
     subtitle: 'Frontend Development',
     description: `This portfolio was developed for the Frontend Development module using TypeScript, Next.js, and React. It showcases my skills in modern web technologies, emphasizing performance, scalability, and clean design.`,
-    link: 'https://github.com/KleeWout/portfolio',
-    imagePath: '/assets/projects/portfolio-light.png',
-    imagePathDark: '/assets/projects/portfolio-dark.png',
+    link: '/',
+    imagePath: '/assets/projects/portfolio-mockup.png',
   },
   {
     id: 3,

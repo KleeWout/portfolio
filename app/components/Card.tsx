@@ -16,7 +16,6 @@ type Project = {
   liveAppLink?: string
   imagePath: string
   imagePathDark?: string
-  external?: boolean
 }
 
 type Props = {
@@ -121,13 +120,9 @@ const Card: React.FC<Props> = ({
             {link ? (
               <div className="flex gap-1">
                 <IconLink />
-                {data.external ? (
-                  <a href={link} target="_blank" rel="noopener noreferrer">
-                    Link
-                  </a>
-                ) : (
-                  <Link href={link}>Link</Link>
-                )}
+                <Link target="_blank" href={link}>
+                  Link
+                </Link>
               </div>
             ) : null}
           </div>

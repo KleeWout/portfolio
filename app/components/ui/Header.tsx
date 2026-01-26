@@ -79,6 +79,12 @@ export default function Header() {
             >
               Projects
             </Link>
+            <Link
+              href="/blog"
+              className="text-main font-semibold transition-colors hover:text-gray-700"
+            >
+              Blog
+            </Link>
             {
               //TODO: Add back in later
               /* <Link
@@ -146,6 +152,13 @@ export default function Header() {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Projects
+            </Link>
+            <Link
+              href="/blog"
+              className="text-main font-semibold transition-colors hover:text-gray-700"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Blog
             </Link>
             <a
               href="mailto:wout.klee1@gmail.com"

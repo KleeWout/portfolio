@@ -1,164 +1,252 @@
-# The "Digital Twin" Experiment: How I Bridged the Gap Between Modern Web Tech and Embedded Hardware
+---
+title: "Smart Office  — Real-time IoT Dashboard with Floor Plan, MQTT & WebSockets"
+date: 2026-01-20
+tags: ["IoT", "Next.js", "WebSockets", "MQTT", "MongoDB", "Prisma", "Fullstack", ""]
+summary: "A full-stack Smart Office platform with real-time device control, sensor monitoring, floor plan visualization, logs, schedules, and MQTT integration."
+---
 
-![Smart Office Architecture Placeholder](https://placehold.co/1200x600/png?text=Smart+Office+Architecture)
+# Smart Office  — Real-time IoT Dashboard with Floor Plan, MQTT & WebSockets
 
-**By [Your Name]**  
-_Computer Science Student & Full-Stack Researcher_
+Most smart office dashboards feel like glorified control panels: you click a button… and *hope* something happens.
+
+For this project, I wanted to build something different: a **-style Smart Office platform** that doesn’t just show device states, but truly feels *alive* — real-time synced, easy to manage, and visualized on an interactive floor plan.
+
+This post explains what I built, how it works under the hood, and what I learned while developing it.
+
+![Smart Office Home Dashboard](/assets/blogs/Screenshot 2026-01-26 214537.png)
+*Smart Office home dashboard showing real-time device controls and sensor readings*
 
 ---
 
-When I first started looking into "IoT" (Internet of Things) for my thesis, I noticed a frustrating dichotomy. I saw either polished consumer products like Philips Hue—closed ecosystems I couldn't tinker with—or messy tangles of Arduino wires that only worked when I held them at a specific angle.
+## ✨ What I built
 
-I wanted to find the middle ground. My research question was simple, but ambitious:
+**Smart Office** is a full-stack IoT platform where you can:
 
-> **"How can I apply modern, type-safe software engineering principles—the kind I use in scalable web apps—to the unpredictable world of embedded hardware?"**
+- ✅ Control devices like lights (toggle ON/OFF)
+- ✅ View sensor readings like temperature + humidity
+- ✅ Manage devices and groups via a clean UI
+- ✅ Place devices on a **Floor Plan** ( visualization)
+- ✅ Track everything via **Logs** (activity + readings)
+- ✅ Schedule actions automatically (timed triggers)
+- ✅ Control access using **Users + Roles**
+- ✅ Connect real devices through **MQTT** + an IoT edge layer
 
-I didn't just want to blink an LED. I wanted to build **Smart Office**: a distributed system where I could control a physical environment using a high-performance "Digital Twin" architecture. I wanted to connect a Next.js dashboard to a fleet of Raspberry Pi micro-controllers, not with loose REST APIs, but with real-time, bi-directional, type-safe synchronization.
-
-Here is the story of how I built it, the specific technologies I chose, and the "Subscribe & Sync" protocol I had to invent to make it work.
-
----
-
-## 1. Why I Chose Full-Stack Type Safety
-
-In my previous projects, I found that IoT often fails at the **interface** layer. I would send a JSON payload like `{ "on": true }` to a device, but the device secretly expected `{ "status": 1 }`. The system would break, and I'd spend hours digging through logs to find a typo.
-
-For this thesis, I refused to accept that fragility. I decided to build my entire stack around **Type Safety**.
-
-### My Tech Stack Selection
-
-- **Next.js (React Framework)**: I needed a reactive, high-performance dashboard that felt professional, not like a prototype.
-- **tRPC (TypeScript Remote Procedure Call)**: This was my absolute favorite tool. It allowed me to share _types_ directly between my backend and frontend. If I decided to rename a device property from `isOn` to `isActive` in my database schema, my frontend code immediately threw a build error. I knew my code was broken _before_ I even ran it.
-- **Prisma & MongoDB**: I chose MongoDB for its flexibility, but I accessed it through Prisma to enforce a strict schema on my data.
-- **Python (Asyncio)**: On the Raspberry Pi 4 side, I stuck with Python because libraries like `RPi.GPIO` are the gold standard. But I wrapped it all in `asyncio` to match the asynchronous nature of the web.
+The goal was to make something that feels like a real product: not just a demo screen, but an actual system you could install and use.
 
 ---
 
-## 2. How I Modeled the "Digital Twin"
+## 🧠 Why I built it
 
-One of the first challenges I faced was Data Modeling. I realized quickly that a "Device" isn't just a row in a table; it's a physical object with a location, a type (Light, Thermostat, Blinds), and specific capabilities.
+This project started as a challenge:
 
-I decided to use a document-oriented approach with MongoDB, which fit the hierarchical nature of my "Floor -> Group -> Device" structure perfectly.
+> Can I build a system where the UI and devices are always synced in real time, while still keeping the backend clean and scalable?
 
-### My Schema Design
+I also wanted to combine multiple areas I enjoy working in:
 
-Here is a snippet of the `schema.prisma` file I designed. You can see how I mapped physical attributes directly to the database:
+- modern web UI (**Next.js**)
+- real-time systems (**WebSockets**)
+- IoT communication (**MQTT**)
+- database modeling (**Prisma + MongoDB**)
+- system design and architecture
 
-```prisma
-model Device {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  type      String   // "light", "socket", "thermostat"
-
-  // The "Digital Twin" State
-  isOn      Boolean  @default(false)
-  value     String?  // e.g., "24.5" for temperature
-
-  // Physical Location Mapping
-  floorId   String?  @db.ObjectId
-  floor     Floor?   @relation(fields: [floorId], references: [id])
-  positionX Float?   // 0-100% on the SVG floor plan
-  positionY Float?   // 0-100% on the SVG floor plan
-}
-```
-
-I specifically added `positionX` and `positionY` as percentages so I could overlay devices onto any SVG floor plan. I built a custom "Drag and Drop" editor in the dashboard, allowing me to move a switch on the screen and have the database automatically update its coordinate space.
+And importantly: I wanted it to be **beginner-friendly and usable**, not only technically correct.
 
 ---
 
-## 3. Inventing the "Subscribe & Sync" Protocol
+## 🧱 System architecture (high-level)
 
-The hardest part of this thesis wasn't the database—it was the **Real-Time Synchronization**.
+The project is built as a layered system:
 
-In my early prototypes, I simply sent a `TOGGLE` command to the Pi whenever a button was clicked. But I soon realized: _What if the Pi is offline? What if it restarts?_ The state would drift, and my dashboard would be lying to the user.
+### 1) UI layer (Next.js dashboard)
+The user interacts with a dashboard containing pages like:
 
-To solve this, I completely pivoted my architecture. I moved away from "Command-Based" control to a **"State-Based" (Digital Twin)** approach. I decided that the Database is the single source of truth, and the hardware is just a _reflection_ of that truth.
+- Home / Dashboard
+- Devices
+- Groups
+- Floor Plan
+- Logs
+- Schedules
+- Users / Roles / Settings
 
-I implemented a custom synchronization protocol over WebSockets.
+The UI updates immediately as events happen (device toggles, sensor updates, logs).
 
-### Phase A: The Subscription Handshake
+### 2) Central backend layer (Node.js + Prisma)
+The backend handles:
 
-I wrote the backend logic so that when a Raspberry Pi connects, it doesn't just listen for _new_ commands. It immediately requests a state dump.
+- database operations
+- role-based access control
+- device metadata
+- schedules
+- logs storage
+- real-time updates to the UI
 
-**My Server-Side Logic (TypeScript/tRPC):**
+### 3) Real-time layer (WebSocket server)
+Instead of forcing the frontend to constantly refresh, changes are pushed instantly.
 
-```typescript
-// src/server/api/routers/live.ts
+Whenever something changes (device status / new reading), clients update in real-time.
 
-onCommand: publicProcedure.input(z.object({ deviceId: z.string() })).subscription(async ({ input, ctx }) => {
-  // 1. I fetch the "Truth" from MongoDB
-  const device = await ctx.prisma.device.findUnique({ where: { id: input.deviceId } });
+### 4) IoT layer (MQTT broker + bridge)
+To talk to real devices, I integrated MQTT:
 
-  return observable((emit) => {
-    // 2. IMMEDIATE SYNC: I force the hardware to match the DB
-    if (device) {
-      emit.next({
-        command: "SYNC",
-        value: device.isOn ? 1 : 0,
-      });
-    }
+- devices publish readings and statuses
+- the server publishes control commands
+- the MQTT bridge translates between MQTT messages and the app state
 
-    // 3. I listen for future changes to keep them in sync
-    eventEmitter.on("deviceCommandIssued", (data) => emit.next(data));
-  });
-}),
-```
+### 5) Database (MongoDB)
+All state and history is stored in MongoDB via Prisma:
 
-### Phase B: The Hardware Reaction
-
-On the Python side, I had to be careful. I programmed the client to handle `SYNC` commands differently than user interactions. When I receive a `SYNC` command, I update the hardware state _silently_, without reporting it back to the server. This prevented the dreaded "Infinite Feedback Loop" I encountered during testing, where the server told the client to turn on, the client turned on and told the server, which then told the client to turn on again.
-
-**My Client-Side Logic (Python):**
-
-```python
-# raspberry-pi/client.py
-
-async def execute_local_command(self, device, command, value):
-    if command == "SYNC":
-        # Authoritative state override
-        device.is_on = bool(value)
-        GPIO.output(device.gpio_pin, GPIO.HIGH if device.is_on else GPIO.LOW)
-        print(f"   ► [SYNC] I forced state to {device.is_on}")
-        # Note: I do NOT report back here!
-```
+- users & roles
+- devices & groups
+- logs (events + readings)
+- schedules
 
 ---
 
-## 4. Battling the "Ghost Device"
+## 🗺️ The "" concept — Floor Plan visualization
 
-One specific issue I battled was what I called the "Ghost Device."
+One of the features I'm most proud of is the **Floor Plan view**.
 
-During one of my stress tests, I unplugged the WiFi router and plugged it back in. To my dismay, the Python script thought it was still connected to the WebSocket, but the server had already dropped the connection. My dashboard showed the device as "Online," but my commands were vanishing into the void.
+Instead of listing devices in a boring table, you can:
 
-**My Solution:**
-I realized I couldn't trust the socket. I had to implement a robust heartbeat and reconnection layer in Python using `asyncio`. I moved away from simple blocking sockets to an asynchronous event loop that manages three distinct tasks:
+- create a floor / level
+- draw or upload a floor plan (SVG)
+- place devices/groups visually on the map
+- control them directly from the layout
 
-1.  **Command Listener**: Waiting for server instructions.
-2.  **Sensor Reporter**: Periodically reading the DS18B20 temperature sensor and pushing data up.
-3.  **Connection Watchdog**: actively pinging the server and forcing a full script reload if the ping fails.
+![Smart Office Floor Plan](/assets/blogs/Screenshot 2026-01-26 214504.png)
+*Interactive floor plan with device placement and real-time control*
 
-This resilience meant my system became "self-healing." I could cut the power, cut the network, or crash the server, and within 5 seconds of restoration, my Smart Office automatically re-synced to its correct state.
+That makes the UI feel like a **digital representation of a real office space**, which is exactly what a  should be.
 
----
-
-## 5. Visualizing My Work
-
-The final piece of the puzzle was the UI. A list of switches is boring, and I wanted my thesis to look impressive.
-
-I built a **Vector-Based Floor Plan Editor** using `Fabric.js`. Using my Next.js frontend, I can:
-
-1.  Upload a raw SVG file of an office layout.
-2.  Drag "Device Nodes" (representing the physical LEDs) directly onto the map.
-3.  Save the coordinates to MongoDB.
-
-When I visit the "View" page, the icons are overlaid on the map. Clicking an icon on the screen sends the WebSocket command, updates the database, triggers my "Digital Twin" sync, and milliseconds later, the physical LED on the Raspberry Pi lights up. Watching that happen for the first time felt like magic.
+It's also a UX upgrade: users immediately understand where things are.
 
 ---
 
-## Conclusion
+## ⚡ Real-time sync: making the system feel “alive”
 
-This research started as a way for me to learn Next.js, but it turned into a comprehensive study of distributed systems, state management, and the complexities of the physical world.
+The platform uses WebSockets so the UI updates instantly.
 
-By treating the hardware not as a dumb accessory but as a first-class citizen in a type-safe architecture, I was able to build a system that is robust, scalable, and surprisingly resilient. It bridges the gap between the clean abstractions of software and the messy reality of hardware, proving that with the right architecture, I really could have the best of both worlds.
+Examples:
 
-_The source code for this project is available on GitHub._
+- toggle a light → the UI updates + an event appears in Logs
+- a sensor publishes new readings → dashboard tiles update live
+- changes made in one browser are reflected in others
+
+This sounds “simple”, but it’s one of the hardest parts to get right:
+
+- you need consistent state
+- you need predictable events
+- you need to avoid UI desync bugs
+- you need logs that reflect truth, not “optimistic UI lies”
+
+I spent a lot of time making sure the system behaves the same every time, even when things disconnect or reconnect.
+
+---
+
+## 👥 Roles & permissions (a real-world requirement)
+
+In real buildings, not everyone should be able to do everything.
+
+So Smart Office includes:
+
+- **User roles** (Admin / Level 1 / Level 2 / User)
+- **Allowed Roles per device**
+- ability to create custom roles
+
+This matters because it forces the platform to behave like a real system: access control isn’t optional in production.
+
+---
+
+## 📅 Scheduling automation
+
+Users can schedule actions like:
+
+- turning on lights at a specific time
+- running device commands later
+
+This adds real business value because automation is often the main reason people want “smart” systems in the first place.
+
+---
+
+## 📜 Logs: observability and debugging
+
+A big problem with IoT systems is that when something goes wrong… you don’t know *why*.
+
+That’s why Logs are part of the product, not an afterthought.
+
+Logs show:
+
+- type (DEVICE / SENSOR)
+- source
+- action/event name (toggle, reading, etc.)
+- value changes (OFF → ON)
+- time of event
+
+This makes debugging much easier and makes the whole platform more trustworthy.
+
+---
+
+## 🛠️ Challenges I ran into
+
+### ✅ 1. Defining the “source of truth”
+In IoT you always have this question:
+
+- is the device state coming from the UI?
+- from the database?
+- from the MQTT message?
+- from the physical device itself?
+
+To keep things stable, the backend acts as the consistent “brain” and publishes events to clients.
+
+### ✅ 2. Keeping UI + MQTT + DB consistent
+Race conditions and out-of-order updates can get messy fast.
+
+So I designed the system around predictable events and logs, and made sure the frontend only reacts to real events.
+
+### ✅ 3. Making it feel like a product
+It’s easy to build a prototype that only works for the developer.
+
+It’s harder to build something where a beginner can:
+
+- install it on a clean PC
+- open the dashboard
+- understand what to do without explaining it in person
+
+So I also wrote documentation and designed flows that make sense for real users.
+
+---
+
+## ✅ What I’m most proud of
+
+- ⭐ The floor plan  UX
+- ⭐ Real-time “reactive” feeling (WebSockets done right)
+- ⭐ Clean separation between UI / backend / IoT integration
+- ⭐ Role-based access control
+- ⭐ Logs + scheduling turning it into an actual usable system
+
+---
+
+## 🔥 What I’d improve next
+
+If I continue this project, I’d love to add:
+
+- device “offline” detection + health status
+- dashboards per building or tenant
+- more device types (dimmers, thermostats, blinds)
+- historical sensor graphs
+- deployment setup for production environments
+
+---
+
+## Final thoughts
+
+This project was a great mix of software engineering, system design and UX thinking.
+
+It gave me hands-on experience with:
+
+- full-stack architecture
+- real-time systems
+- IoT communication patterns
+- designing something usable, not just “working”
+
+And most importantly: it was fun to build.

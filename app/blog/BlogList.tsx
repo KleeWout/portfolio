@@ -20,7 +20,11 @@ export default function BlogList({ posts }: BlogListProps) {
                   {post.frontmatter.title}
                 </p>
                 <p className="text-small text-default-500">
-                  {post.frontmatter.date}
+                  {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
                 </p>
               </div>
             </CardHeader>
